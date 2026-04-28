@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>404. That’s an error.</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202124;
+    background: #fff;
+}
+
+/* LOADER TOPO */
+.top-loader {
+    position: fixed;
+    top: 0;
+    height: 6px;
+    width: 0%;
+    background: #1a73e8;
+}
+
+/* CENTRAL */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 60px;
+}
+
+/* TEXTO */
+.text {
+    max-width: 800px;
+    text-align: left;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 22px;
+    color: #5f6368;
+    line-height: 1.7;
+}
+
+/* BARRA */
+.progress-bar {
+    width: 100%;
+    max-width: 600px;
+    height: 10px;
+    background: #e0e0e0;
+    margin-top: 40px;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #1a73e8;
+}
+
+/* CONTAGEM */
+.countdown {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #9aa0a6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-loader" id="topbar"></div>
+
+<div class="container">
+    <div class="text">
+        <h1>404. That’s an error.</h1>
+
+        <p>
+            The requested URL was not found on this server.<br>
+            That’s all we know.
+        </p>
+
+        <div class="progress-bar">
+            <div class="progress" id="bar"></div>
+        </div>
+
+        <p class="countdown">
+            Redirecting in <span id="time">3600</span> seconds...
+        </p>
+    </div>
+</div>
+
+<script>
+let tempo = 3600;
+let progresso = 0;
+let topo = 0;
+
+const contador = document.getElementById("time");
+const barra = document.getElementById("bar");
+const topbar = document.getElementById("topbar");
+
+// TEMPO
+const t = setInterval(() => {
+    tempo--;
+    contador.textContent = tempo;
+
+    if (tempo <= 0) {
+        clearInterval(t);
+        clearInterval(b);
+        clearInterval(tp);
+        window.location.href = "https://www.google.com";
+    }
+}, 1000);
+
+// BARRA PRINCIPAL
+const b = setInterval(() => {
+    progresso += 100 / 3600;
+    if (progresso > 100) progresso = 100;
+
+    barra.style.width = progresso + "%";
+}, 1000);
+
+// BARRA TOPO
+const tp = setInterval(() => {
+    topo += Math.random() * 2;
+    if (topo > 100) topo = 100;
+
+    topbar.style.width = topo + "%";
+
+    if (topo >= 100) clearInterval(tp);
+}, 500);
+
+// BLOQUEAR SCROLL (teclado)
+window.addEventListener("keydown", function(e) {
+    const keys = ["ArrowUp","ArrowDown","Space","PageUp","PageDown"];
+    if (keys.includes(e.code)) {
+        e.preventDefault();
+    }
+}, { passive: false });
+</script>
+
+</body>
+</html>
